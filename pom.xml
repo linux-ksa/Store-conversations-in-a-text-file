@@ -1,0 +1,136 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>plugins</artifactId>
+        <groupId>org.igniterealtime.openfire</groupId>
+        <version>4.7.0</version>
+    </parent>
+    <groupId>org.igniterealtime.openfire.plugins</groupId>
+    <artifactId>monitoring</artifactId>
+    <version>2.5.1-SNAPSHOT</version>
+    <name>Monitoring Plugin</name>
+    <description>Monitors conversations and statistics of the server.</description>
+
+    <properties>
+        <jackson.version>2.12.1</jackson.version>
+        <jersey.version>2.35</jersey.version>
+    </properties>
+
+    <build>
+        <sourceDirectory>src/java</sourceDirectory>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+            </plugin>
+            <!-- Compiles the Openfire Admin Console JSP pages. -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-jspc-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-jetty-http</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-jetty-servlet</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.inject</groupId>
+            <artifactId>jersey-hk2</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jrobin</groupId>
+            <artifactId>jrobin</artifactId>
+            <version>1.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.0.13</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-core</artifactId>
+            <version>8.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-queryparser</artifactId>
+            <version>8.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itext7-core</artifactId>
+            <version>7.2.2</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>com.orsonpdf</groupId>
+            <artifactId>orsonpdf</artifactId>
+            <version>1.9</version>
+        </dependency>
+
+        <!-- For java 9+, see: https://stackoverflow.com/questions/51916221 -->
+        <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.activation/activation -->
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime -->
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>2.3.3</version>
+        </dependency>
+
+    </dependencies>
+
+    <repositories>
+        <!-- Where dependencies are obtained (such as the parent project). -->
+        <repository>
+            <id>igniterealtime</id>
+            <name>Ignite Realtime Repository</name>
+            <url>https://igniterealtime.org/archiva/repository/maven/</url>
+        </repository>
+
+        <!-- For jrobin -->
+        <repository>
+            <id>opennms-repo</id>
+            <name>OpenNMS Release Repository</name>
+            <url>https://repo.opennms.org/maven2/</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <!-- Typically used to retrieve Maven plugins that are used by this project.
+             This apparently is also used to botain the dependencies _used by_ these
+             plugins (such as the openfire-plugin-assembly-descriptor, needed to
+             package the project as an Openfire plugin!) -->
+        <pluginRepository>
+            <id>igniterealtime</id>
+            <name>Ignite Realtime Repository</name>
+            <url>https://igniterealtime.org/archiva/repository/maven/</url>
+        </pluginRepository>
+    </pluginRepositories>
+</project>
